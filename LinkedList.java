@@ -82,7 +82,7 @@ public class LinkedList {
 	 */
 	public void add(int index, MemoryBlock block) {
 		if (index < 0 || index > size) {
-			throw new IllegalArgumentException("Index must be between 0 and size");
+			throw new IllegalArgumentException("index must be between 0 and size");
 		}
 		Node newNode = new Node(block);
 		if (index == 0) { // Insert at the beginning
@@ -135,8 +135,8 @@ public class LinkedList {
 	 *         if index is negative or greater than or equal to size
 	 */
 	public MemoryBlock getBlock(int index) {
-		if (index < 0 || index > size) {
-            throw new IllegalArgumentException("Index must be between 0 and size");
+		if (index < 0 || index > size || first == null) {
+            throw new IllegalArgumentException("index must be between 0 and size");
         }
 		Node node = getNode(index);
         return node.block;
@@ -169,7 +169,7 @@ public class LinkedList {
 	 *        the node that will be removed from this list
 	 */
 	public void remove(Node node) {
-		if (node == null) return;
+		//if (node == null) return;
 	
 		if (node == first) {
 			first = first.next;
@@ -201,7 +201,7 @@ public class LinkedList {
 	 */
 	public void remove(int index) {
 		if (index < 0 || index >= size) {
-			throw new IllegalArgumentException("Index must be between 0 and size - 1");
+			throw new IllegalArgumentException("index must be between 0 and size - 1");
 		}
 		if (index == 0) { // Remove the first node
 			first = first.next;
@@ -229,7 +229,7 @@ public class LinkedList {
 	public void remove(MemoryBlock block) {
 		int index = indexOf(block);
         if (index == -1) {
-            throw new IllegalArgumentException("Memory block not found in the list");
+            throw new IllegalArgumentException("index must be between 0 and size");
         }
         remove(index);
 	}	
@@ -244,22 +244,31 @@ public class LinkedList {
 	/**
 	 * A textual representation of this list, for debugging.
 	 */
+        @Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		Node current = first;
-	
-		while (current != null) {
-			MemoryBlock block = current.block;
-			sb.append("[").append(block.baseAddress).append(", ")
-			  .append(block.length).append("]");
-	
-			if (current.next != null) {
-				sb.append(" "); // Space between nodes
-			}
-	
+		String theString = "";
+		Node current = this.first;
+		while (current != null){
+			theString = theString + current.block.toString() + " ";
 			current = current.next;
 		}
+		return theString;
+
+		//StringBuilder sb = new StringBuilder();
+		//Node current = first;
 	
-		return sb.toString();
+		//while (current != null) {
+		//	MemoryBlock block = current.block;
+		//	sb.append("[").append(block.baseAddress).append(", ")
+		//	  .append(block.length).append("]");
+	
+		//	if (current.next != null) {
+		//		sb.append(" "); // Space between nodes
+		//	}
+	
+		//	current = current.next;
+		//}
+	
+		//return sb.toString();
 	}
 }
