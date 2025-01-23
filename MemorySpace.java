@@ -172,7 +172,7 @@ public class MemorySpace {
 			iterator1.next(); // Move to the next block in the outer loop
 		}
 	
-		System.out.println(toString());
+		//System.out.println(toString());
 	}
 	
 }
